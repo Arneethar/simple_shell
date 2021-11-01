@@ -60,3 +60,77 @@ _putchar(str[i]);
 i++;
 }
 }
+
+
+/**
+ * _strcmp - function to compare two strings and print difference in ascii
+ * @s1: char pointer to first string
+ * @s2: char pointer to second string
+ * Return: Always (difeerence)
+ */
+int _strcmp(char *s1, char *s2)
+{
+
+while ((*s1 != '\0' && *s2 != '\0') && (*s1 == *s2))
+{
+s1++;
+s2++;
+}
+if (*s1 == *s2)
+{
+return (0);
+}
+else
+{
+return (*s1 - *s2);
+}
+}
+
+
+
+/**
+ * _strcpy - function that copies the string
+ *
+ * @dest: pointer to destination char
+ * @src: pointer to source char
+ * Return: char
+ */
+char *_strcpy(char *dest, char *src)
+{
+int i;
+for (i = 0; src[i] != '\0'; i++)
+{
+*(dest + i) = *(src + i);
+}
+*(dest + i) = '\0';
+return (dest);
+}
+
+
+/**
+ * _strdup - copies the input string
+ * @string: input string
+ *
+ * Return: *ptr to the copied string or  NULL (if Error)
+ */
+char *_strdup(char *string)
+{
+char *dup;
+unsigned int i = 0, length = 0;
+
+if (string == NULL)
+return (NULL);
+
+while (string[length])
+length++;
+
+dup = malloc(sizeof(char) * (length + 1));
+
+if (dup == NULL)
+return (NULL);
+
+while ((dup[i] = string[i]) != '\0')
+i++;
+
+return (dup);
+}
