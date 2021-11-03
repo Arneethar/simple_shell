@@ -1,4 +1,5 @@
 #include "shell.h"
+/**
  * _printenv - prints environment like printenv
  *
  * Return: 0
@@ -31,10 +32,10 @@ int strn_cmp(char *s1, char *s2, int i)
   char p1, p2;
   while (i--)
     {
-      c1 = *s1++;
-      c2 = *s2++;
-      if (c1 == '\0' || c1 != c2)
-	return (c1 > c2 ? 1 : (c1 < c2 ? -1 : 0));
+      p1 = *s1++;
+      p2 = *s2++;
+      if (p1 == '\0' || p1 != p2)
+	return (p1 > p2 ? 1 : (p1 < p2 ? -1 : 0));
     }
   return (0);
 }

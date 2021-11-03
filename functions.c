@@ -22,12 +22,6 @@ return (*s1 - *s2);
 
 
 
-
-
-
-
-
-
 /**
  * _putchar - function that outputs a character
  * @c: input character
@@ -152,62 +146,4 @@ dest++;
 }
 *dest = '\0';
 return (r);
-}
-/**
- * read_cmd reading user input
- * return: ptr
- */
-
-char *read_cmd(void)
-{
-char buf[1024];
-char *ptr = NULL;
-char ptrlen = 0;
-
-while(fgets(buf, 1024, stdin))
-{
-int buflen = _strlen(buf);
-if(!ptr)
-{
-ptr = malloc(buflen+1);
-}
-else
-{
-char *ptr2 = realloc(ptr, ptrlen+buflen+1);
-
-if(ptr2)
-{
-ptr = ptr2;
-}
-else
-{
-free(ptr);
-ptr = NULL;
-}
-}
-
-if(!ptr)
-{
-fprintf(stderr, "failed to alloc buffer: %s\n", strerror(errno));
-return NULL;
-}
-
-_strcpy(ptr+ptrlen, buf);
-
-if(buf[buflen-1] == '\n')
-{
-if(buflen == 1 || buf[buflen-2] != '\\')
-{
-return ptr;
-}
-
-ptr[ptrlen+buflen-2] = '\0';
-buflen -= 2;
-print_prompt2();
-}
-
-ptrlen += buflen;
-}
-
-return ptr;
 }

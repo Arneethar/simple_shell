@@ -8,19 +8,23 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 
-
-char *_strdup(char *str);
+char *_strdup(char *string);
 char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
-int _strlen(char *s);
+int _strlen(char *str);
 char *_strcpy(char *dest, char *src);
-char *_uitoa(unsigned int count);
+char *path_finder(char *cmd);
+int _putchar(char c);
+void _puts(char *str);
+int _printenv(void);
+int _strcmpdir(char *s1, char *s2);
+int call_command(char *cmdarr[]);
+int strn_cmp(char *s1, char *s2, int i);
+char *_getenv(char *var);
+void absent(char *cmd);
+int _read(char *s, size_t __attribute__((unused))file_stream);
 
-
-void print_prompt1(void);
-void print_prompt2(void);
-
-char *read_cmd(void);
-
+extern char **environ;
 #endif
