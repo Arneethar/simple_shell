@@ -13,7 +13,7 @@ char *_read_line(void)
 
 
 	/* have _getline allocate the buffer. */
-	res = _getline(&line, &bufsize, STDIN_FILENO);
+	res = getline(&line, &bufsize, STDIN_FILENO);
 	if (res == -1)
 	{
 		free(line);
