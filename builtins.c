@@ -1,58 +1,154 @@
 #include "shell.h"
-/**
- * _printenv - prints environment like printenv
- *
- * Return: 0
- */
-int _printenv(void)
-{
-char *s = environ[0];
-int i = 0;
 
-while (s)
+/**
+  * _cd - Change the directory.
+  * @args: List of arguments passed from parsing.
+  * @input: Input line for free.
+  * Return: 1 if works.
+  */
+int _cd(char **args, __attribute__((unused)) char *input)
 {
-write(1, s, _strlen(s));
-write(1, "\n", 1);
-s = environ[++i];
+
+if (args[1] == NULL)
+{
+if (chdir(_getenv("HOME")) != 0)
+{
+perror("hsh:");
 }
+}
+else
+{
+if (chdir(args[1]) != 0)
+{
+perror("hsh:");
+}
+}
+return (1);
+}
+
+
+/**
+  * _help - Display the help for a command.
+  * @args: List of arguments passed from parsing.
+  * @input: Input line for free.
+  * Return: 1 if works.
+  */
+int _help(__attribute__((unused)) char **args,
+		__attribute__((unused)) char *input)
+{
+int i;
+char *builtin_str[] = {"cd", "help", "exit"};
+
+for (i = 0; i < 3; i++)
+{
+write(STDOUT_FILENO, builtin_str[i], _strlen(builtin_str[i]));
+write(STDOUT_FILENO, "\n", 1);
+}
+return (1);
+}
+
+/**
+  * hsh_exit - Exit the shell.
+  * @args: List of arguments passed from parsing.
+  * @input: Input line for free.
+  * Return: 0 if works.
+  */
+int hsh_exit(__attribute__((unused)) char **args, char *input)
+{
+int var;
+
+if (args[1] == NULL)
+return (0);
+
+var = _atoi(args[1]);
+
+if (var < 0)
+{
+perror("hsh:");
+return (1);
+}
+else if (var == 0)
+{
 return (0);
 }
-
-/**
- * strn_cmp - lexicographically compares not more that a selected number of
- * characters from two strings
- * @s1: string 1
- * @s2: string 2
- * @i: number determinant
- * Return: 1 for s2 > s1, 0 for equal and and 1 for s1 > s2
- */
-
-int strn_cmp(char *s1, char *s2, int i)
+else if (var >= 256)
 {
-  char p1, p2;
-  while (i--)
-    {
-      p1 = *s1++;
-      p2 = *s2++;
-      if (p1 == '\0' || p1 != p2)
-	return (p1 > p2 ? 1 : (p1 < p2 ? -1 : 0));
-    }
-  return (0);
+free(input);
+free(args);
+exit(var - 256);
+}
+else
+{
+free(input);
+free(args);
+exit(var);
+}
 }
 
 /**
- * _getenv - prints environment similar to getenv
- * @var: environ variable
- * Return: 0
- */
-char *_getenv(char *var)
+  * _env - Display the environ in the shell.
+  * @args: List of arguments passed from parsing.
+  * @input: Input line for free.
+  * Return: 1 if works.
+  */
+int _env(__attribute__((unused)) char **args,
+		__attribute__((unused)) char *input)
 {
 int i = 0;
 
-for (i = 0; environ[i]; i++)
+while (environ[i] != 0)
 {
-if (strn_cmp(environ[i], var, _strlen(var)) == 0)
-return (&environ[i][_strlen(var)]);
+
+
+_puts(environ[i]);
+_puts("\n");
+i++;
 }
-return (NULL);
+return (1);
+}
+
+/**
+  * _setenv - Set an environment variable.
+  * @name:Name of the variable
+  * @value: Value in the variable.
+  * Return: 1 if works.
+  */
+int _setenv(char *name, char *value)
+{
+char *tmp, new_variable[1024];
+char **ep = environ;
+char **ev;
+int counter = 0, i;
+
+if (value == NULL)
+{
+perror("hsh:");
+}
+tmp = _getenv(name);
+if (tmp != NULL)
+{
+_strcpy(tmp, value);
+}
+else
+{
+while (ep[counter] != NULL)
+{
+counter++;
+}
+counter += 2;
+ev = malloc(counter * sizeof(char *));
+for (i = 0; ep[i] != NULL; i++)
+{
+ev[i] = ep[i];
+}
+_strcat(new_variable, name);
+_strcat(new_variable, "=");
+_strcat(new_variable, value);
+ev[i] = new_variable;
+ev[++i] = NULL;
+environ = ev;
+free(ep);
+}
+
+return (1);
 }

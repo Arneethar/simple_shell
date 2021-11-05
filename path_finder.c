@@ -1,57 +1,86 @@
 #include "shell.h"
+
 /**
- * path_finder - Takes PATH string, tokenizes it, then concats with "/" & cmd
- * @cmd: command passed from getline in main
- * Return: new_path
+ * alloc_error2 -  Allocation error
+ * storing the address of the buffer containing the text into *b.
+ *
+ * @buffer: buffer to check
+ * Return: -1 on eror.
  */
-
-char *path_finder(char *cmd)
+int alloc_error2(char *buffer)
 {
+if (!buffer)
+{ perror("hsh: allocation error\n");
+return (-1);
+}
+else
+return (0);
+}
 
-  int i = 0, j = 0;
-  char *path = _strdup(_getenv("PATH"));
-  char *path_tokens = path_tokens = strtok(path, ":");
-  char *path_array[100];
-  char *string = cmd;
-  char *new_path = NULL;
-  struct stat buffer;
+/**
+ * alloc_error1 -  Allocation error
+ * storing the address of the buffer containing the text into *b.
+ * @dest_path: dest path
+ * @buffer: buffer to check
+ * Return: -1 on eror.
+ */
+int alloc_error1(char *buffer, char *dest_path)
+{
+if (!buffer)
+{ free(dest_path);
+perror("hsh: allocation error\n");
+return (-1);
+}
+return (0);
+}
 
-  
-  new_path = malloc(sizeof(char) * 100);
-  if (_getenv("PATH")[0] == ':')
-		if (stat(cmd, &buffer) == 0)
-			return (_strdup(cmd));
-  
-  /* tokenise to get each path since its seperated by : */
- 
+/**
+  * _check_path - Split the line wrote in the console.
+  * @args: Line wrote in console.
+  * @flag: flag
+  * Return: String with the file path.
+  */
 
-  while (path_tokens != NULL)
-    {
-      /* store each path in path_array */
-      path_array[i++] = path_tokens;
-      path_tokens = strtok(NULL, ":");
-    }
-  path_array[i] = NULL;
-  /* appending / to path and adding command */
-  for (j = 0; path_array[j]; j++)
-    {
-      _strcpy(new_path, path_array[j]);
-      _strcat(new_path, "/");
-	_strcat(new_path, string);
-      _strcat(new_path, "\0");
+char **_check_path(char **args, int *flag)
+{
+char *path, **tokens_path, *dest_path, *copy_line;
+int j, k;
 
-      if (stat(new_path, &buffer) == 0)
-	{
-	  free(path);
-	  return (new_path);
-	}
-      else
-	new_path[0] = 0;
-    }
-  free(path);
-  free(new_path);
-
-  if (stat(cmd, &buffer) == 0)
-    return (_strdup(cmd));
-  return (NULL);
+for (k = 0; *(args[0] + k) != '\0'; k++) /* Check for '/' in the first arg */
+{
+if (*(args[0] + k) == '/')
+return (args); /* printf("%s\n", argv[1]);*/
+}
+dest_path = malloc(sizeof(char) * 1024); /*Memory alloc for the comp path */
+if (alloc_error2(dest_path) == -1)
+return (NULL);
+path = _getenv("PATH"); /*  Gets the path from the envi with the diff paths */
+copy_line = malloc((_strlen(path) + 1) * sizeof(char *));
+if (alloc_error1(copy_line, dest_path) == -1)
+return (NULL);
+tokens_path = _split_path(path, copy_line); /* Get array of ptr to pos paths*/
+if (tokens_path == NULL)
+{ free(copy_line);
+return (NULL);
+} /* File path (dest_path) add the '/' and the comm */
+for (j = 0; *(tokens_path + j) != NULL; j++)
+{ _strcpy(dest_path, *(tokens_path + j));
+if (*dest_path != '\0')
+_strcat(dest_path, "/");
+else
+_strcat(dest_path, "./");
+_strcat(dest_path, args[0]);
+if (access(dest_path, X_OK) != -1) /* Check access rights */
+{ args[0] = dest_path;
+*flag = 1;
+free(copy_line);
+free(tokens_path);
+return (args);
+}
+}
+free(dest_path);
+free(tokens_path);
+free(copy_line);
+perror("hsh");
+return (NULL);
 }

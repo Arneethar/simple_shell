@@ -57,14 +57,12 @@ return (i);
 char *_strcat(char *dest, char *src)
 {
 int i, j;
+j = _strlen(dest);
 for (i = 0; src[i] != '\0'; i++)
 {
-for (j = 0; dest[j] != '\0'; j++)
-{
-;
+dest[j + i] = src[i];
 }
-dest[j] = dest[j] + src[i];
-}
+dest[j + i] = '\0';
 return (dest);
 }
 
@@ -136,14 +134,110 @@ return (0);
  */
 char *_strcpy(char *dest, char *src)
 {
-char *r = dest;
-
-while (*src != '\0')
+int j, i = 0;
+while (src[i] != '\0')
 {
-*dest = *src;
-src++;
-dest++;
+i++;
 }
-*dest = '\0';
-return (r);
+
+for (j = 0; j <= i; j++)
+{
+dest[j] = src[j];
+}
+dest[j + 1] = '\0';
+return (dest);
+}
+
+/**
+ * _strncmp - string comparison
+ * @s1: first string
+ * @s2: second string
+ * @n: number of strings
+ * Return: o if the strings are equal or difference if strings are different
+ */
+int _strncmp(const char *s1, const char *s2, int n)
+{
+unsigned char c1 = '\0';
+unsigned char c2 = '\0';
+int n4;
+
+if (n >= 4)
+{
+n4 = n >> 2;
+do {
+c1 = (unsigned char) *s1++;
+c2 = (unsigned char) *s2++;
+if (c1 == '\0' || c1 != c2)
+return (c1 - c2);
+c1 = (unsigned char) *s1++;
+c2 = (unsigned char) *s2++;
+if (c1 == '\0' || c1 != c2)
+return (c1 - c2);
+c1 = (unsigned char) *s1++;
+c2 = (unsigned char) *s2++;
+if (c1 == '\0' || c1 != c2)
+return (c1 - c2);
+c1 = (unsigned char) *s1++;
+c2 = (unsigned char) *s2++;
+if (c1 == '\0' || c1 != c2)
+return (c1 - c2);
+} while (--n4 > 0);
+n &= 3;
+}
+while (n > 0)
+{
+c1 = (unsigned char) *s1++;
+c2 = (unsigned char) *s2++;
+if (c1 == '\0' || c1 != c2)
+return (c1 - c2);
+n--;
+}
+return (c1 - c2);
+}
+
+
+/**
+  * _atoi - Change a string to a integer.
+  * @s: String.
+  * Return: Integer into the string.
+  */
+int _atoi(char *s)
+{
+int i = 0, flag = 0, num = 1;
+unsigned int potencia = 1, suma = 0;
+
+while (s[i])
+{
+if ((s[i] == '-' || s[i] == '+') && flag == 0)
+{
+if (s[i] == '-')
+{
+num *= -1;
+}
+else
+{
+num *= 1;
+}
+}
+else if (s[i] >= '0' && s[i] <= '9')
+{
+flag = 1;
+}
+else if (flag)
+{
+break;
+}
+
+i++;
+}
+
+i--;
+while (s[i] >= '0' && s[i] <= '9')
+{
+suma += (s[i] - '0') * potencia;
+potencia *= 10;
+i--;
+}
+
+return (suma * num);
 }
