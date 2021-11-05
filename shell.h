@@ -8,67 +8,54 @@
 #include <stdio.h>
 #include <string.h>
 #include <stddef.h>
-
+#include <signal.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 /* Environmental variables */
 
 extern char **environ;
 
+typedef struct dir
+{
+char *directory_path;
+struct dir *next;
+} dir;
 /* Function declarations (prototypes) for main functions*/
-void _loop(void);
-char *_read_line(void);
-char **_split_line(char *line);
-int _execute(char **args, char *input);
-int _launch(char **args);
-void sigint_handler(int sig);
 
-/* Function declarations (prototypes for for builtin shell commands */
-int hsh_exit(char **args, char *input);
-int _cd(char **args, __attribute__((unused)) char *input);
-/**
-  * _help - Help function
-  * @args: List of arguments passed from parsing.
-  * @input: Input line for free.
-  * Return: 1 if works.
-  */
-int _help(__attribute__((unused)) char **args,
-		__attribute__((unused)) char *input);
 
-/**
-  * _env - Env function
-  * @args: List of arguments passed from parsing.
-  * @input: Input line for free.
-  * Return: 1 if works.
-  */
-int _env(__attribute__((unused)) char **args,
-	__attribute__((unused)) char *input);
-int _setenv(char *name, char *value);
+int _setenv(const char *name, const char *value, int overwrite);
+char *_getenv(const char *name);
+int _unsetenv(const char *name);
 
-/* Function declarations (prototypes) for auxiliary funtions */
-ssize_t _getline(char **b, size_t *bufsize, FILE *stream);
-int _getc(void);
-
-char *_strtok(char *s, const char *delim);
-char *_strtok_r(char *s, const char *delim, char **save_str);
-int _strcspn(char *s, const char *delim);
-int _strspn(char *s, const char *delim);
+int _strlen(char *s);
+int _strcmp(const char *s1, const char *s2);
+char *_const_strconcat(const char *s1, const char *s2);
+char *_strconcat(char *s1, char *s2);
+char *_strdup(char *str);
 
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
-char *_getenv(const char *name);
-char **_path(char *path);
-char **_split_path(char *line, char *copy_line);
-char **_check_path(char **args, int *flag);
-
-int _strlen(char *s);
-char *_strcat(char *dest, char *src);
-int _strcmp(char *s1, char *s2);
-char *_strcpy(char *dest, char *src);
-int _strncmp(const char *s1, const char *s2, int n);
+int _get_cmds_number(char *str);
+void _free_cmds(char **cmds);
 
 int _putchar(char c);
 void _puts(char *str);
-int _atoi(char *s);
 
+char *_find_path(char *str);
 
+void _disp_cnf_err(char *pn, char *err_src, int num);
+void _disp_err(char *str);
+
+char **create_cmds(char *str);
+
+void sig_handler(int i);
+
+void exec_usr_input(char *av0, char **cmds, int status, char *lineptr);
+
+void _free_proc_conds(char **cmds, char *lineptr);
+
+int _atoi(char *str);
+
+void exit_func(char **cmds);
 #endif

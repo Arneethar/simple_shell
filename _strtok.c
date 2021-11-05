@@ -1,96 +1,48 @@
 #include "shell.h"
 
-/**
-* _strcspn - Find the position where the delimiter is found in the string.
-* @s: String.
-* @delim: Delimiter.
-* Return: the position in the string.
-*/
-	int _strcspn(char *s, const char *delim)
+* _get_cmds_number - returns the number of commands entered by the user.
+ * @str: user input from buffer of getline.
+ * Return: number of commands.
+ */
+int _get_cmds_number(char *str)
 {
-	int counter = 0, i;
+int n = 0, i;
 
-	while (*s)
-	{
-		for (i = 0; delim[i] != '\0'; i++)
-		{
-			if (*s == delim[i])
-				return (counter);
-		}
-		counter++;
-		s++;
-	}
-	return (counter);
+for (i = 0; str[i]; i++)
+{
+if (str[i] == ' ' && str[i + 1] != ' ')
+n++;
+}
+return (n);
 }
 
 /**
-* _strspn - Find the position until the delimiter is equal to the string.
-* @s: String.
-* @delim: Delimiter.
-* Return: the position when the delimiter is different from the string.
-*/
-
-int _strspn(char *s, const char *delim)
+ * _free_cmds - function to frees commands
+ * @cmds: pointer to pointer to commands token frm getline
+ * Return: void
+ */
+void _free_cmds(char **cmds)
 {
-	int i;
+int i = 0;
 
-	for (i = 0; (s[i] == delim[i]) && (s[i] != '\0' && delim[i] != '\0'); i++)
-	{
-		;
-	}
-	return (i);
+while (cmds[i])
+{
+free(cmds[i]);
+i++;
 }
-/**
-* _strtok_r - Find the first token in a string until the delimiter
-*             and save the rest of the string in save_str.
-* @s: String.
-* @delim: Delimiter.
-* @save_str: The rest of the string.
-* Return: First word token up.
-*/
-
-char *_strtok_r(char *s, const char *delim, char **save_str)
-{
-	char *end;
-
-	if (s == NULL)
-		s = *save_str;
-
-	if (*s == '\0')
-	{
-		*save_str = s;
-		return (NULL);
-	}
-
-	s += _strspn(s, delim);
-
-	if (*s == '\0')
-	{
-		*save_str = s;
-		return (NULL);
-	}
-	end = s + _strcspn(s, delim);
-
-	if (*end == '\0')
-	{
-		*save_str = end;
-		return (s);
-	}
-
-	*end = '\0';
-	*save_str = end + 1;
-	return (s);
+free(cmds);
 }
+
 /**
-* _strtok - Token up a string of words separated by a delimiter.
-* @s: String.
-* @delim: Delimiter.
-* Return: Word with token.
-*/
-
-char *_strtok(char *s, const char *delim)
+ * _free_proc_conds - free cmds and getline buffer under certain conditions
+ * @cmds: array of user commands.
+ * @lineptr: getline's buffer.
+ * Return: void.
+ */
+void _free_proc_conds(char **cmds, char *lineptr)
 {
-	static char *olds;
-
-	return (_strtok_r(s, delim, &olds));
+if (cmds != NULL)
+_free_cmds(cmds);
+if (lineptr != NULL)
+free(lineptr);
 }

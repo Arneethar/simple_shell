@@ -1,42 +1,34 @@
 #include "shell.h"
 
 /**
-* _split_line - Split the line written in the console.
-* @line: Line wrote in console.
-* Return: An array with all words split.
-*/
-
-char **_split_line(char *line)
+ * create_cmds - create array of typed commands.
+ * @str: buffer from getline function.
+ * Return: array of commands.
+ */
+char **create_cmds(char *str)
 {
-	int bufsize = 64, position = 0;
-	char **tokens;
-	char *token;
+int i = 0;
+char **cmds, *token;
 
-	tokens = malloc(bufsize * sizeof(char *));
-	if (!tokens)
-	{
-		perror("hsh: allocation error\n");
-		return (NULL);
-	}
-
-	token = _strtok(line, " \t\r\n\a");
-	while (token != NULL)
-	{
-		tokens[position] = token;
-		position++;
-
-		if (position >= bufsize)
-		{
-	      bufsize += 64;
-	      tokens = _realloc(tokens, bufsize - 64, bufsize * sizeof(char *));
-			if (!tokens)
-			{
-				perror("hsh: allocation error\n");
-				return (NULL);
-			}
-		}
-		token = _strtok(NULL, " \t\r\n\a");
-	}
-	tokens[position] = NULL;
-	return (tokens);
+token = strtok(str, " \n");
+if (token == NULL || token[0] == '\0')
+{
+return (NULL);
+}
+cmds = malloc(sizeof(char *) * 2);
+*(cmds + i) = _strdup(token);
+i++;
+while (token != NULL)
+{
+cmds = _realloc(
+cmds,
+sizeof(char *) * (i + 1),
+sizeof(char *) * (i + 2)
+);
+token = strtok(NULL, " \n");
+*(cmds + i) = _strdup(token);
+i++;
+}
+*(cmds + i) = NULL;
+return (cmds);
 }

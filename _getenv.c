@@ -1,28 +1,96 @@
 #include "shell.h"
 
 /**
-   * _getenv - Find a variable in all environment variables.
-    * @name: Name of the environment variable.
-     * Return: All the content into the environment variable.
-      */
+* _getenv - Find a variable in all environment variables.
+* @name: Name of the environment variable.
+* Return: All the content into the environment variable.
+*/
 
 char *_getenv(const char *name)
 {
-size_t len;
-char **ep;
+char *envar, *tmp;
+int i;
 
-/* Get NAME length*/
-len = _strlen((char *)name);
+i = 0;
+envar = NULL;
 
-
-if (environ == NULL || name[0] == '\0')
-return (NULL);
-
-len--;
-for (ep = environ; *ep != NULL; ep++)
+while (environ[i] != NULL)
 {
-if (!_strncmp(*ep, name, len) && (*ep)[len + 1] == '=')
-return (&(*ep)[len + 2]);
+tmp = _strdup(environ[i]);
+envar = strtok(tmp, "=");
+if (_strcmp(envar, name) == 0)
+return (strtok(NULL, "="));
+i++;
 }
-return (NULL);
+return (envar);
+}
+
+
+/**
+ * _setenv - initialize a new env var or change an existing one.
+ * @name: name of the desired env variable.
+ * @value: value of the env var you're looking for.
+ * @overwrite: if 1, it overwrites the existing env var with the given name.
+ * Return: 1 on success, 0 otherwise.
+ */
+int _setenv(const char *name, const char *value, int overwrite)
+{
+char *env_var;
+int ei;
+
+ei = 0;
+env_var = *(environ + ei);
+
+while (env_var != NULL)
+{
+if (_strcmp(name, env_var) == 0)
+{
+if (overwrite != 0)
+*(environ + ei) = _strcat(
+_strcat(name, "="), value );
+return (0);
+}
+else
+{
+ei++;
+env_var = *(environ + ei);
+}
+}
+if (env_var == NULL)
+{
+*(environ + ei) = _strcat(
+_strcat(name, "="), value );
+ei++;
+*(environ + ei) = NULL;
+return (0);
+}
+return (1);
+}
+
+/**
+ * _unsetenv - removes an environment variable.
+ * @name: name of env var you're looking for.
+ * Return: 1 on success.
+ */
+int _unsetenv(const char *name)
+{
+int i;
+
+i = 0;
+while (environ[i] != NULL)
+{
+if (_strcmp(name, environ[i]) == 0)
+{
+while (environ[i + 1])
+{
+environ[i] = environ[i + 1];
+i++;
+}
+environ[i] = NULL;
+break;
+}
+else
+i++;
+}
+return (1);
 }

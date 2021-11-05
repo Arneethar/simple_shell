@@ -48,43 +48,25 @@ return (1);
 }
 
 /**
-  * hsh_exit - Exit the shell.
-  * @args: List of arguments passed from parsing.
-  * @input: Input line for free.
-  * Return: 0 if works.
-  */
-int hsh_exit(__attribute__((unused)) char **args, char *input)
+ * exit_func - exit function
+ * @cmds: commands array.
+ * Return: void.
+ */
+void exit_func(char **cmds)
 {
-int var;
+int i;
 
-if (args[1] == NULL)
-return (0);
-
-var = _atoi(args[1]);
-
-if (var < 0)
-{
-var = 2;
-exit (var);
-}
-else if (var == 0)
-{
-return (0);
-}
-else if (var >= 256)
-{
-free(input);
-free(args);
-exit(var - 256);
-}
+if (!cmds[1])
+exit(0);
 else
 {
-free(input);
-free(args);
-exit(var);
-}
-}
+i = _atoi(cmds[1]);
+if (i < 0)
+i = 2;
 
+exit(i);
+}
+}
 /**
   * _env - Display the environ in the shell.
   * @args: List of arguments passed from parsing.
