@@ -64,8 +64,8 @@ var = _atoi(args[1]);
 
 if (var < 0)
 {
-perror("hsh:");
-return (2);
+var = 2;
+exit (var);
 }
 else if (var == 0)
 {
