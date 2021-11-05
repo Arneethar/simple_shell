@@ -9,11 +9,9 @@
 #include <string.h>
 #include <stddef.h>
 
-<<<<<<< HEAD
-/* Environmental variables */
-=======
 
->>>>>>> 33450ca7583b9e0fcee0d34ffdcb872f64e4dc57
+/* Environmental variables */
+
 extern char **environ;
 
 /* Function declarations (prototypes) for main functions*/
@@ -66,17 +64,11 @@ int _strlen(char *s);
 char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
-<<<<<<< HEAD
-int _strncmp(const char *s1, const char *s2, size_t n);
-=======
 int _strncmp(const char *s1, const char *s2, int n);
->>>>>>> 33450ca7583b9e0fcee0d34ffdcb872f64e4dc57
+
 int _putchar(char c);
 void _puts(char *str);
 int _atoi(char *s);
 
-<<<<<<< HEAD
+
 #endif
-=======
-#endif
->>>>>>> 33450ca7583b9e0fcee0d34ffdcb872f64e4dc57
