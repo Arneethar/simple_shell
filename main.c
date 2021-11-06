@@ -1,4 +1,4 @@
-#include "header.h"
+#include "shell.h"
 /**
  * main - main simple shell function.
  * @ac: arguments count.

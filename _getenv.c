@@ -46,8 +46,8 @@ while (env_var != NULL)
 if (_strcmp(name, env_var) == 0)
 {
 if (overwrite != 0)
-*(environ + ei) = _strcat(
-_strcat(name, "="), value );
+*(environ + ei) = _const_strconcat(
+_const_strconcat(name, "="), value );
 return (0);
 }
 else
@@ -58,8 +58,8 @@ env_var = *(environ + ei);
 }
 if (env_var == NULL)
 {
-*(environ + ei) = _strcat(
-_strcat(name, "="), value );
+*(environ + ei) = _const_strconcat(
+_const_strconcat(name, "="), value );
 ei++;
 *(environ + ei) = NULL;
 return (0);

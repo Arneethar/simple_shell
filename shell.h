@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <errno.h>
 #include <stdio.h>
 #include <string.h>
 #include <stddef.h>
@@ -27,11 +28,13 @@ struct dir *next;
 int _setenv(const char *name, const char *value, int overwrite);
 char *_getenv(const char *name);
 int _unsetenv(const char *name);
+char *_const_strconcat(const char *s1, const char *s2);
 
 int _strlen(char *s);
 int _strcmp(const char *s1, const char *s2);
-char *_const_strconcat(const char *s1, const char *s2);
-char *_strconcat(char *s1, char *s2);
+char *_strcpy(char *dest, char *src);
+
+char *_strcat(char *s1, char *s2);
 char *_strdup(char *str);
 
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);

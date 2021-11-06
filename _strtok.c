@@ -1,6 +1,6 @@
 #include "shell.h"
-
-* _get_cmds_number - returns the number of commands entered by the user.
+/**
+ * _get_cmds_number - returns the number of commands entered by the user.
  * @str: user input from buffer of getline.
  * Return: number of commands.
  */
