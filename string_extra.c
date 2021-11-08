@@ -19,7 +19,7 @@ len++;
 
 p = malloc(sizeof(char) * (len + 1));
 
-if (dup == NULL)
+if (p == NULL)
 return (NULL);
 
 while ((p[i] = str[i]) != '\0')
