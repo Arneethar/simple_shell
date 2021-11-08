@@ -1,62 +1,39 @@
 #include "shell.h"
 
+/**
+  * builtin_func - Redirect to builtin functions.
+  * @builtin_func: Redirect to builtin functions.
+  * Return: 1 if _help works, 0 if exit works.
+  */
+
+int (*builtin_func[])(char **args, char *input) = {
+&_cd,
+&_help,
+&hsh_exit,
+&_env,
+};
 
 /**
- * _disp_cnf_err - it displays error for command not found.
- * @pn: program name that from which generated the error.
- * @err_src: error source to print.
- * @num: typed commands number.
- * Return: nothing.
- */
-void _disp_cnf_err(char *pn, char *err_src, int num)
+  * _execute - Execute builtin process.
+  * @args: List of arguments passed from parsing.
+  * @input: Input line for free.
+  * Return: _launch(args).
+  */
+int _execute(char **args, char *input)
 {
-_puts(pn);
-_puts(": ");
-_putchar(num + '0');
-_puts(": ");
-_puts(err_src);
-_puts(": not found");
-}
+char *builtin_str[] = {"cd", "help", "exit", "env"};
+int i;
 
-/**
- * _disp_err - it displays normal errors.
- * @cmd: command.
- * Return: nothing.
- */
-void _disp_err(char *cmd)
-{
-perror(cmd);
-}
+if (args[0] == NULL)
+return (1);
 
+if (_strcmp(args[0], "setenv") == 0)
+return (_setenv(args[1], args[2]));
 
-/**
- * exec_usr_input - execute user input in shell.
- * @av0: first element of av.
- * @cmds: typed commands.
- * @status: number to change it's value with sys call wait.
- * @lineptr: getline's buffer;
- * Return: void.
- */
-void exec_usr_input(char *av0, char **cmds, int status, char *lineptr)
+for (i = 0; i < 4; i++)
 {
-pid_t c;
-
-c = fork();
-if (c == -1)
-{
-perror(av0);
+if (_strcmp(args[0], builtin_str[i]) == 0)
+return ((*builtin_func[i])(args, input));
 }
-if (c == 0)
-{
-if (execve(cmds[0], cmds, environ) == -1)
-{
-perror(av0);
-exit(EXIT_FAILURE);
-}
-}
-if (wait(&status) == -1)
-{
-_free_proc_conds(cmds, lineptr);
-perror(av0);
-}
+return (_launch(args));
 }

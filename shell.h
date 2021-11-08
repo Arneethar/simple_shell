@@ -30,7 +30,7 @@ char *_getenv(const char *name);
 int _unsetenv(const char *name);
 char *_const_strconcat(const char *s1, const char *s2);
 
-int _strlen(char *s);
+int _strlen(char *str);
 int _strcmp(const char *s1, const char *s2);
 char *_strcpy(char *dest, char *src);
 
