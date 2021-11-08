@@ -14,7 +14,7 @@ int inter = 1, len;
 if (isatty(STDIN_FILENO) != 1)
 inter = 0;
 
-signal(SIGINT, sigint_handler);
+signal(SIGINT, sig_handler);
 
 do {
 if (inter != 0)
