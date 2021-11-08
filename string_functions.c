@@ -1,19 +1,4 @@
 #include "shell.h"
-/**
- * _strlen - Find the lenght of a string.
- * @s: string.
- * Return: lenght of the string.
- */
-int _strlen(char *s)
-{
-int i = 0;
-
-while (*(s + i) != '\0')
-{
-i++;
-}
-return (i);
-}
 
 /**
  * _strcat - Concatent two strings.
@@ -138,32 +123,6 @@ n--;
 return (c1 - c2);
 }
 
-/**
- * _strdup - returns a pointer to a newly allocated memory space, which contai
- * a copy of the string given a s a parameter
- * @str: string
- * Return: str or NULL
- */
-char *_strdup(char *str)
-{
-int len = 0;
-char *p;
-int i;
-
-if (str == NULL)
-return (NULL);
-
- while (str[len])
-len++;
-p = malloc(sizeof(char) * len + 1);
-if (p == NULL)
-{
-return (NULL);
-}
-for (i = 0; i <= len; i++)
-p[i] = str[i];
-return (p);
-}
 
 /**
  * _const_strconcat - concatenates s2 to the end of s1.

@@ -38,7 +38,7 @@ position++;
 if (position >= bufsize)
 {
 bufsize += 1024;
-tokens = _realloc(tokens, bufsize - 1024, bufsize * sizeof(char *));
+tokens = _realloc(tokens, bufsize - 1024, bufsize *sizeof(char *));
 if (!tokens)
 {
 perror("hsh: allocation error\n");
