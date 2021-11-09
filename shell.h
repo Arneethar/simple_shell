@@ -51,7 +51,8 @@ char *_strtok_r(char *s, const char *delim, char **save_str);
 int _strcspn(char *s, const char *delim);
 int _strspn(char *s, const char *delim);
 char *_strdup(char *str);
-
+int _strtcmp(const char *s1, const char *s2);
+char *_const_strconcat(const char *s1, const char *s2);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
 char *_getenv(const char *name);

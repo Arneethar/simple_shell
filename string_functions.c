@@ -22,36 +22,6 @@ return (dest);
 }
 
 /**
- * _strcmp - compare strings
- * @s1: string
- * @s2: string
- * Return: 0 if strings are equal, non-zero, otherwise.
- */
-int _strcmp(const char *s1, const char *s2)
-{
-int s1len = 0;
-int s2len = 0;
-int len = 0;
-int i;
-
-s1len = strlen(s1);
-s2len = strlen(s2);
-
-if (s2len >= s1len)
-len = s1len;
-else
-len = s2len;
-for (i = 0; i < len; i++)
-{
-if (s2[i] != s1[i])
-{
-return (s1[i] - s2[i]);
-}
-}
-return (0);
-}
-
-/**
   * _strcpy - Print the same string.
   * @dest: array;
   * @src: string;.

@@ -1,9 +1,7 @@
 #include "shell.h"
-
 /**
  * alloc_error2 -  Allocation error
  * storing the address of the buffer containing the text into *b.
- *
  * @buffer: buffer to check
  * Return: -1 on eror.
  */
@@ -42,12 +40,10 @@ return (0);
   * @flag: flag
   * Return: String with the file path.
   */
-
 char **_check_path(char **args, int *flag)
 {
 char *path, **tokens_path, *dest_path, *copy_line;
 int j, k;
-
 for (k = 0; *(args[0] + k) != '\0'; k++) /* Check for '/' in the first arg */
 {
 if (*(args[0] + k) == '/')
