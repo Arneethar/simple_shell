@@ -1,11 +1,10 @@
 #include "shell.h"
 
 /**
-   * _getenv - Find a variable in all environment variables.
-    * @name: Name of the environment variable.
-     * Return: All the content into the environment variable.
-      */
-
+* _getenv - Find a variable in all environment variables.
+* @name: Name of the environment variable.
+* Return: All the content into the environment
+*/
 char *_getenv(const char *name)
 {
 size_t len;

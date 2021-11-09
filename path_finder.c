@@ -1,16 +1,15 @@
 #include "shell.h"
-
 /**
  * alloc_error2 -  Allocation error
  * storing the address of the buffer containing the text into *b.
- *
  * @buffer: buffer to check
  * Return: -1 on eror.
  */
 int alloc_error2(char *buffer)
 {
 if (!buffer)
-{ perror("hsh: allocation error\n");
+{
+perror("hsh: allocation error\n");
 return (-1);
 }
 else
@@ -27,7 +26,8 @@ return (0);
 int alloc_error1(char *buffer, char *dest_path)
 {
 if (!buffer)
-{ free(dest_path);
+{
+free(dest_path);
 perror("hsh: allocation error\n");
 return (-1);
 }
@@ -40,12 +40,10 @@ return (0);
   * @flag: flag
   * Return: String with the file path.
   */
-
 char **_check_path(char **args, int *flag)
 {
 char *path, **tokens_path, *dest_path, *copy_line;
 int j, k;
-
 for (k = 0; *(args[0] + k) != '\0'; k++) /* Check for '/' in the first arg */
 {
 if (*(args[0] + k) == '/')
@@ -60,11 +58,13 @@ if (alloc_error1(copy_line, dest_path) == -1)
 return (NULL);
 tokens_path = _split_path(path, copy_line); /* Get array of ptr to pos paths*/
 if (tokens_path == NULL)
-{ free(copy_line);
+{
+free(copy_line);
 return (NULL);
 } /* File path (dest_path) add the '/' and the comm */
 for (j = 0; *(tokens_path + j) != NULL; j++)
-{ _strcpy(dest_path, *(tokens_path + j));
+{
+_strcpy(dest_path, *(tokens_path + j));
 if (*dest_path != '\0')
 _strcat(dest_path, "/");
 else

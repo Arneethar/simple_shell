@@ -28,7 +28,7 @@ tokens[position] = copy_line;
 /* printf("%d: %s\n", position, tokens[position]);*/
 position++;
 }
-token = _strtok(copy_line, delim);
+token = strtok(copy_line, delim);
 while (token != NULL)
 {
 tokens[position] = token;
@@ -38,14 +38,14 @@ position++;
 if (position >= bufsize)
 {
 bufsize += 1024;
-tokens = _realloc(tokens, bufsize - 1024, bufsize * sizeof(char *));
+tokens = _realloc(tokens, bufsize - 1024, bufsize *sizeof(char *));
 if (!tokens)
 {
 perror("hsh: allocation error\n");
 return (NULL);
 }
 }
-token = _strtok(NULL, delim);
+token = strtok(NULL, delim);
 }
 tokens[position] = NULL;
 return (tokens);

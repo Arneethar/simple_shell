@@ -84,7 +84,6 @@ free(args);
 exit(var);
 }
 }
-
 /**
   * _env - Display the environ in the shell.
   * @args: List of arguments passed from parsing.
@@ -106,6 +105,7 @@ i++;
 }
 return (1);
 }
+
 
 /**
   * _setenv - Set an environment variable.
@@ -136,7 +136,7 @@ while (ep[counter] != NULL)
 counter++;
 }
 counter += 2;
-ev = malloc(counter * sizeof(char *));
+ev = malloc(counter *sizeof(char *));
 for (i = 0; ep[i] != NULL; i++)
 {
 ev[i] = ep[i];
