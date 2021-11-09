@@ -9,11 +9,7 @@
 #include <string.h>
 #include <stddef.h>
 
-<<<<<<< HEAD
-/* Environmental variables */
-=======
 
->>>>>>> 33450ca7583b9e0fcee0d34ffdcb872f64e4dc57
 extern char **environ;
 
 /* Function declarations (prototypes) for main functions*/
@@ -22,7 +18,7 @@ char *_read_line(void);
 char **_split_line(char *line);
 int _execute(char **args, char *input);
 int _launch(char **args);
-void sigint_handler(int sig);
+void sig_handler(int sig);
 
 /* Function declarations (prototypes for for builtin shell commands */
 int hsh_exit(char **args, char *input);
@@ -54,7 +50,9 @@ char *_strtok(char *s, const char *delim);
 char *_strtok_r(char *s, const char *delim, char **save_str);
 int _strcspn(char *s, const char *delim);
 int _strspn(char *s, const char *delim);
-
+char *_strdup(char *str);
+int _strtcmp(const char *s1, const char *s2);
+char *_const_strconcat(const char *s1, const char *s2);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
 char *_getenv(const char *name);
@@ -62,21 +60,13 @@ char **_path(char *path);
 char **_split_path(char *line, char *copy_line);
 char **_check_path(char **args, int *flag);
 
-int _strlen(char *s);
+int _strlen(char *str);
 char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
-<<<<<<< HEAD
-int _strncmp(const char *s1, const char *s2, size_t n);
-=======
 int _strncmp(const char *s1, const char *s2, int n);
->>>>>>> 33450ca7583b9e0fcee0d34ffdcb872f64e4dc57
 int _putchar(char c);
 void _puts(char *str);
 int _atoi(char *s);
 
-<<<<<<< HEAD
 #endif
-=======
-#endif
->>>>>>> 33450ca7583b9e0fcee0d34ffdcb872f64e4dc57
