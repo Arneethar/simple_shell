@@ -4,7 +4,8 @@ Description
 This team project is part of the first year curriculum of ALX-Holberton School.This is a simple command interpreter.
 
 Authors
-Olatunde Lawal
+Olatunde Lawal.
+
 Arneethar
 
 ***************************************************************
@@ -14,59 +15,61 @@ Man page for the HSH simple shell.
 
 shell.h
 Header file. Prototypes and extern variables definition.
-
+*****************************************************************
 main.c
 _loop.c
 It contains the main iterative component, which calls the functions that are responsible for: printing the prompt, reading the command line, parsing the command line and executing.
+************************************************************************
 
 _getline.c
 Contains _getline function which reads an entire line from stream and stores it in a address of the buffer.
-
+*************************************************************************
 _getc.c
 Contains the auxiliar _getc function which reads the next character in the stream.
-
+**************************************************************************
 _read.c
 Contains the _read_line function which calls the getline function to read the command lines entered in the prompt.
-
+****************************************************************************
 _strtok.c
 It contains the _strtok auxiliary function code, which in turn depends on the auxiliary functions _strtok_r, _strcspn and _strspn.
-
+*******************************************************************************
 _parse.c
 It contains the _split_line function, which calls the _strtok function to split the line entered into the prompt and then returns it as an array containing the tokens.
-
+*******************************************************************************
 _execute.c
 It contains the _execute function, which is responsible for checking if the command entered is a built-in, otherwise, it sends it to its execution in _launch.
-
+*******************************************************************************
 _builtins.c
 This file contains all built-in functions such as _cd, _help, hsh_exit and _env.
-
+*******************************************************************************
 _process.c
 It contains the _launch function that is responsible for creating a child process, in which it makes the execve system call, passing the commands correctly formatted from the PATH.
-
+******************************************************************************
 _getenv.c
 It contains the _getenv function which searches for a variable in the list of environment variables and returns the corresponding string.
-
+****************************************************************************
 _split_path.c
 It contains the _split_path function which is responsible for splitting the string returned by _getenv on each of the paths.
-
+***************************************************************************
 path_finder.c
 It contains the _split_path function that checks if the command entered in the prompt is in one of the paths, and in this case, it gives the right format to enter it to the execve system call.
-
+*******************************************************************************
 _realloc.c
 It contains all memory function _realloc.
-
+*************************************************************************
 _atoi.c
 Contains the atoi function for converting string to int
+******************************************************************
 
 _print_aux.c
 Contains some auxilliary print function
-
+*************************************************************************
 _signal.c
 File contains a signal function for signal a halt process
-
+******************************************************************************
 string_functions.c
 It contains all auxiliary string functions such as _strlen, _strcat, _strcmp, _strcpy and strncmp.
-
+*******************************************************************************
 
 string_extras.c
 It contains extra strinig functions
