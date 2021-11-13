@@ -5,7 +5,7 @@ This team project is part of the first year curriculum of ALX-Holberton School.T
 
 Authors
 Olatunde Lawal
-Tomiwa N. Okafor
+Arneethar
 Files
 man_1_simple_shell
 Man page for the HSH simple shell.
@@ -53,8 +53,18 @@ It contains the _split_path function that checks if the command entered in the p
 _realloc.c
 It contains all memory function _realloc.
 
+_atoi.c
+Contains the atoi function for converting string to int
+
+_print_aux.c
+Contains some auxilliary print function
+
+_signal.c
+File contains a signal function for signal a halt process
+
 string_functions.c
 It contains all auxiliary string functions such as _strlen, _strcat, _strcmp, _strcpy and strncmp.
+
 
 string_extras.c
 It contains extra strinig functions
