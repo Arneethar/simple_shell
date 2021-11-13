@@ -1,6 +1,7 @@
 Simple Shell
+
 Description
-This team project is part of the first year curriculum of ALX-Holberton School. This is a simple command interpreter.
+This team project is part of the first year curriculum of ALX-Holberton School.This is a simple command interpreter.
 
 Authors
 Olatunde Lawal
@@ -46,7 +47,7 @@ It contains the _getenv function which searches for a variable in the list of en
 _split_path.c
 It contains the _split_path function which is responsible for splitting the string returned by _getenv on each of the paths.
 
-_path_finder.c
+path_finder.c
 It contains the _split_path function that checks if the command entered in the prompt is in one of the paths, and in this case, it gives the right format to enter it to the execve system call.
 
 _realloc.c
