@@ -6,6 +6,8 @@ This team project is part of the first year curriculum of ALX-Holberton School.T
 Authors
 Olatunde Lawal
 Arneethar
+
+***************************************************************
 Files
 man_1_simple_shell
 Man page for the HSH simple shell.
@@ -68,6 +70,8 @@ It contains all auxiliary string functions such as _strlen, _strcat, _strcmp, _s
 
 string_extras.c
 It contains extra strinig functions
+*************************************************************************
+
 Functionality
 Functionality 0
 Contains README, man, AUTHORS files The AUTHORS file at the root of the repository, listing all individuals having contributed content to the repository.
@@ -96,20 +100,21 @@ Functionality 7
 Simple shell 0.3 Simple shell 0.2 +
 Handle the PATH.
 
+*******************************************************************
 Functionality 8
 Simple shell 0.4 Simple shell 0.3 +
 Implement the exit built-in, that exits the shell. It doesn't have to handle any argument to the built-in exit.
-
+********************************************************************
 Functionality 11
 Simple shell 1.0 Simple shell 0.4 +
 Implement the env built-in, that prints the current environment.
-
+********************************************************************
 Functionality 13
 Simple shell 1.0 +
 Implement the builtin command cd:
 
 Changes the current directory of the process. Command syntax: cd [DIRECTORY] If no argument is given to cd the command must be interpreted like cd $HOME. Handles the command cd -. Updates the environment variable PWD when one changes directory.
-
+**************************************************************************
 Functionality 19
 Simple shell 1.0 +
 Help built-in. Usage: help [BUILTIN]
@@ -137,7 +142,7 @@ And you can also execute the command with flags and parameters as follows:
 
 
 $ ls -la /usr
-
+****************************************************************************
 Built-in commands:
 You can use the cd command to move between the directory system like this:
 
